@@ -1,6 +1,6 @@
 # ATX1 FabB — Functional Test Software
 
-Console-based functional test application for the **MPDU ATX1 Fab B** board.
+Console-based functional test application for the **MPDU ATX1 Fab B** board.  
 Targets **.NET Framework 4.7.2** and is part of the Intel STHI manufacturing test flow.
 
 ---
@@ -31,12 +31,13 @@ Targets **.NET Framework 4.7.2** and is part of the Intel STHI manufacturing tes
 The following paths must exist on the test station before running:
 
 ```
-C:\STHI\NG20V\ITUFFTemplate.xml   — ITUFF logging template
-C:\STHI\NG20V\binlist.xml         — Bin code definitions
-C:\STHI\NG20V\NG_20V_BLT.ini     — BLT configuration (SN, AA, FW revisions, etc.)
-C:\STHI\NG20V\DVM.xml             — DVM channel map
-C:\STHI\NG20V\DIO2.xml            — DIO channel map
-C:\STHI\NG20V\ReadTach\gpio1_sample.exe  — Fan tach reader executable
+C:\STHI\ATX1\ITUFFTemplate.xml              — ITUFF logging template
+C:\STHI\ATX1\binlist.xml                    — Bin code definitions
+C:\STHI\ATX1\ATX1_BLT.ini                  — BLT configuration (SN, AA, FW revisions, etc.)
+C:\STHI\ATX1\DVM.xml                        — DVM channel map
+C:\STHI\ATX1\DIO2.xml                       — DIO channel map
+C:\STHI\ATX1\ReadTach\gpio1_sample.exe      — Fan tach reader executable
+C:\STHI\ATX1\RestartUsbPort\RestartUsbPort.exe — USB port restart utility
 ```
 
 ---
@@ -51,8 +52,8 @@ ATX1.exe <test_name>
 
 | Command | Description |
 |---------|-------------|
-| `readblt` | Read BLT EEPROM and verify against `NG_20V_BLT.ini` |
-| `writeblt` | Write BLT EEPROM from `NG_20V_BLT.ini` |
+| `readblt` | Read BLT EEPROM and verify against `ATX1_BLT.ini` |
+| `writeblt` | Write BLT EEPROM from `ATX1_BLT.ini` |
 | `vidpid` | Program MCP2210 USB VID/PID to Intel values (`8087/0BE1`) |
 | `pson` | Test GPIO-controlled PS_ON signal (enable/disable 20V output) |
 | `20v_test` | Test GPIO-controlled 20V power rail (enable/disable) |
@@ -62,11 +63,11 @@ ATX1.exe <test_name>
 | `gpio_aux` | Test GPIO-controlled 12V Aux power rail (enable/disable) |
 | `pmbus` | PMBus I2C communication test with CRPS (read model string) |
 | `default_config` | Reset GPIO NVRAM to POR state (GPIO4 High, rails enabled) |
-| `atx1_ft` | Full functional test sequence |
+| `atx1_ft` | Full functional test sequence for MPDU ATX1 Fab B |
 | `loop_ft` | Run full functional test in a loop |
 | `fan_tach` | Read and log fan tach frequency (debug, no pass/fail) |
 | `pwrok` | Read and verify GPIO5 PWR_OK signal is HIGH |
-| `findmpdu` | Locate the MPDU USB device port via `RestartUsbPort.exe` |
+| `findmpdu` | Locate the MPDU ATX1 Fab B USB device port via `RestartUsbPort.exe` |
 
 ---
 
