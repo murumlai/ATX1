@@ -1,0 +1,44 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]ny[Cc][Pp][Uu]/
+publish/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Roslyn / analyzers
+*.Ide.GeneratedFiles/
+
+# Test results
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Log / temp files
+*.log
+*.tmp
+*.temp
+ehthumbs.db
+Thumbs.db
+
+# Old Mercurial ignore (kept for reference)
+.hgignore
