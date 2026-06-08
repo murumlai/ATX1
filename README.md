@@ -1,6 +1,6 @@
 # ATX1 FabB — Functional Test Software
 
-Console-based functional test application for the **ATX1 (MPDU 20V PDB1)** board.  
+Console-based functional test application for the **MPDU ATX1 Fab B** board.
 Targets **.NET Framework 4.7.2** and is part of the Intel STHI manufacturing test flow.
 
 ---

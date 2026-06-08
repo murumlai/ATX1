@@ -702,7 +702,7 @@ namespace _ATX1
                     try
                     {
                         Log.Info("########################################################################################");
-                        Log.Info($"Starting FT for NG 20V MPDU PDB1 ...");
+                        Log.Info($"Starting FT for MPDU ATX1 Fab B ...");
 
                         Bin = pdb1.pdb1ft();
 
@@ -736,7 +736,7 @@ namespace _ATX1
                         try
                         {
                             Log.Info("########################################################################################");
-                            //Log.Info($"Starting FT loop for 20V MPDU PDB1 ...  Loop = {loop}");
+                            //Log.Info($"Starting FT loop for MPDU ATX1 Fab B ...  Loop = {loop}");
                             Log.Info($"Starting FT for ATX1 Fab B ...");
 
                             Bin = pdb1.pdb1ft();
@@ -1095,7 +1095,7 @@ namespace _ATX1
 
             try
             {
-                Log.Info("Starting BLT read test for MPDU 20V PDB1");
+                Log.Info("Starting BLT read test for MPDU ATX1 Fab B");
 
                 BLT_RD = BLT.BLT_Access.ReadBLT(device.EEPROM);
                 Log.Info("+++++++++++++++++++++++++++++++++++++++++++");
@@ -1309,7 +1309,7 @@ namespace _ATX1
 
             try
             {
-                Log.Info("Starting BLT write test for MPDU 20V PDB1");
+                Log.Info("Starting BLT write test for MPDU ATX1 Fab B");
                 for (byte i = 0x00; i < BLT_SIZE; i += 0x01)
                     BLT.BLT_Access.WriteBLT(device.EEPROM, i, BLT_WR[i]);
                 Log.Info("+++++++++++++++++++++++++++++++++++++++++++++");
