@@ -52,9 +52,9 @@ namespace FT
 
             Log.Info("Cleared old DIO/DVM map files");
 
-            STDIO.LoadDVMMapFile(@"C:\STHI\NG20V\DVM.xml");
+            STDIO.LoadDVMMapFile(@"C:\STHI\ATX1\DVM.xml");
             Thread.Sleep(2000);
-            STDIO.LoadDIOMapFile(@"C:\STHI\NG20V\DIO2.xml");
+            STDIO.LoadDIOMapFile(@"C:\STHI\ATX1\DIO2.xml");
             Thread.Sleep(2000);
 
             STDIO.SetInitialDIOState();
@@ -179,7 +179,7 @@ namespace FT
         }
         public static int UpdateINI(string SN, string AA)
         {
-            string path = @"C:\STHI\NG20V\NG_20V_BLT.ini";
+            string path = @"C:\STHI\ATX1\ATX1_BLT.ini";
 
             int pos1 = SN.IndexOf("=");
 
