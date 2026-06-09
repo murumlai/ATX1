@@ -697,7 +697,7 @@ namespace _ATX1
 
                     break;
 
-                case "ng_20v_ft":
+                case "atx1_ft":
 
                     try
                     {

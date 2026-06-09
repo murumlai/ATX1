@@ -9,7 +9,7 @@ Targets **.NET Framework 4.7.2** and is part of the Intel STHI manufacturing tes
 
 | Project | Framework | Description |
 |---------|-----------|-------------|
-| `20vNG/ATX1.csproj` | .NET 4.7.2 | Main console test executable |
+| `ATX1/ATX1.csproj` | .NET 4.7.2 | Main console test executable |
 | `BLT/BLT.csproj` | .NET 3.5 | Board Level Tracking (EEPROM read/write) |
 | `MCP2210/MCP2210.csproj` | .NET 3.5 | USB-to-SPI driver wrapper for MCP2210 |
 

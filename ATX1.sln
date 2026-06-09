@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.6.11822.322 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATX1", "20vNG\ATX1.csproj", "{35BFC561-1A96-4743-89FF-3AAF50AB0946}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATX1", "ATX1\ATX1.csproj", "{35BFC561-1A96-4743-89FF-3AAF50AB0946}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLT", "BLT\BLT.csproj", "{7642E013-62FA-4CFB-9C21-27CEA3E8286C}"
 EndProject
