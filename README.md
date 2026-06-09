@@ -22,7 +22,7 @@ Targets **.NET Framework 4.7.2** and is part of the Intel STHI manufacturing tes
 | **MCP2210** | USB-to-SPI bridge — used for BLT EEPROM access and VID/PID programming |
 | **Aardvark I2C/SPI** | PMBus communication with CRPS power supply |
 | **FT232 / WCF STDIO** | GPIO control, DVM voltage measurements, DIO state control |
-| **CRPS** | Common Redundant Power Supply — 20V/12V power rails under test |
+| **CRPS** | Common Redundant Power Supply |
 
 ---
 
