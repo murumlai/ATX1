@@ -63,7 +63,7 @@ ATX1.exe <test_name>
 | `gpio_aux` | Test GPIO-controlled 12V Aux power rail (enable/disable) |
 | `pmbus` | PMBus I2C communication test with CRPS (read model string) |
 | `default_config` | Reset GPIO NVRAM to POR state (GPIO4 High, rails enabled) |
-| `ng_20v_ft` | Full functional test sequence for MPDU ATX1 Fab B |
+| `atx1_ft` | Full functional test sequence for MPDU ATX1 Fab B |
 | `loop_ft` | Run full functional test in a loop |
 | `fan_tach` | Read and log fan tach frequency (debug, no pass/fail) |
 | `pwrok` | Read and verify GPIO5 PWR_OK signal is HIGH |
