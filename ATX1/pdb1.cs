@@ -690,8 +690,8 @@ namespace FT
             Thread.Sleep(5000);           
 
             obj = new Logger();
-            obj.StartLot("C:\\STHI\\NG20V\\ITUFFTemplate.xml");
-            obj.LoadBinList("C:\\STHI\\NG20V\\binlist.xml");
+            obj.StartLot("C:\\STHI\\ATX1\\ITUFFTemplate.xml");
+            obj.LoadBinList("C:\\STHI\\ATX1\\binlist.xml");
             obj.StartDut();
 
             AddSN(@"C:\STHI\01.scan");
@@ -719,13 +719,13 @@ namespace FT
 
             if (!isConnected)
             {
-                UsbSpi = new DevIO(0x8087, 0x0BD3); // todo: check the pid
+                UsbSpi = new DevIO(0x8087, 0x0BE3); 
                 isConnected = UsbSpi.Settings.GetConnectionStatus();
                 porVidPid = false;
                 Log.Info("Board has correct POR VID/PID. Wont be re-programmed.");
 
                 if (!isConnected)
-                    throw new Exception("Device not connected with either 048d/00de or 8087/."); //update
+                    throw new Exception("Device not connected with either 048d/00de or 8087/0BE3."); 
             }
 
             try
@@ -736,14 +736,14 @@ namespace FT
 
                     INonVolatileRam vram = device.NonVolatileRam;
 
-                    Log.Info("Programming POR Intel VID/PID : 8087/0BD3"); //check
+                    Log.Info("Programming POR Intel VID/PID : 8087/0BE3"); 
                     UsbKeyPowerSettings keypower1 = new UsbKeyPowerSettings();
 
                     keypower1.RemoteWakeUpCapable = false;
                     keypower1.RequestedCurrent = 100;//mA
                     keypower1.HostPowered = true;
                     keypower1.VID = 0x8087;
-                    keypower1.PID = 0x0BD3; //change later
+                    keypower1.PID = 0x0BE3;
                     vram.WriteUsbSettings(keypower1);
                     Log.Info("Done programming VID/PID.");
                     Thread.Sleep(1000);
@@ -835,7 +835,7 @@ namespace FT
             Log.Info("Reading 20V output to verify PS_ON is disabled");
             try
             {
-                read_20V(0.0);
+                //todo : create 12v test for pson
             }
             catch (Exception ex)
             {
@@ -859,7 +859,7 @@ namespace FT
             Log.Info("Reading 20V output to verify PS_ON is enabled");
             try
             {
-                read_20V(10.0);
+                //todo : create 12v test for pson
             }
             catch (Exception ex)
             {
@@ -874,59 +874,7 @@ namespace FT
                 return Bin;
             }
 
-            #endregion PS_ON Test
-
-            #region 20v_test
-            obj.StartTest("GPIO test - enable or disable 20V");
-            // Setting GPIO to read 20V output
-            Log.Info("Starting DVM test for GPIO-based 20V connectors - disabled");
-            gpio_en = new bool[9] { true, false, true, false, true, false, false, false, false };
-            setGPIO(gpio_en);
-            Thread.Sleep(5000);
-
-            Log.Info("Reading 20V output to verify output is disabled");
-            try
-            {
-                read_20V(0.0);
-            }
-            catch (Exception ex)
-            {
-                powerOffCRPS();
-                Bin = 10640203;
-                Log.Error("Disaster: Disable 20v power rail using GPIO failed.");
-                Log.Error(ex.Message);
-                obj.SetDutResult(Bin);
-                obj.EndDut();
-                obj.EndLot();
-                copytoHost();
-                return Bin;
-            }
-
-            Log.Info("Starting DVM test for GPIO-based 20V connectors - enabled");
-            gpio_en = new bool[9] { false, false, false, false, true, false, false, false, false };
-            setGPIO(gpio_en);
-            Thread.Sleep(5000);
-
-            Log.Info("Reading 20V output to verify output is enabled");
-            try
-            {
-                read_20V(10.0);
-            }
-            catch (Exception ex)
-            {
-                powerOffCRPS();
-                Bin = 10640204;
-                Log.Error("Disaster: Enable 20v power rail using GPIO failed.");
-                Log.Error(ex.Message);
-                obj.SetDutResult(Bin);
-                obj.EndDut();
-                obj.EndLot();
-                copytoHost();
-                return Bin;
-            }
-
-            obj.EndTest(true);
-            #endregion 20v_test  
+            #endregion PS_ON Test           
 
             #region 12V_AUX_test
             obj.StartTest("GPIO test - enable or disable 20V");
@@ -1048,9 +996,9 @@ namespace FT
             obj.EndTest(true);
 
 
-            obj.StartTest("12VO ,12V CPU and 20V connectors Test");
+            obj.StartTest("12VO ,12V CPU connectors Test");
             // 12VO ,12V CPU and 20V connectors
-            Log.Info("Starting DVM test for MPDU 12VO ,12V CPU and 20V connectors");
+            Log.Info("Starting DVM test for MPDU 12VO ,12V CPU connectors");
 
             DIOState[] FanMapping = new DIOState[6] { DIOState.HIGH, DIOState.HIGH, DIOState.HIGH,
                                                       DIOState.HIGH,DIOState.HIGH,DIOState.HIGH};

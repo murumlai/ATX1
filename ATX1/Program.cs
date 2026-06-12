@@ -193,75 +193,7 @@ namespace _ATX1
                     }
 
 
-                    break;
-
-                case "pson":
-                    obj = new Logger();
-                    obj.StartLot("C:\\STHI\\ATX1\\ITUFFTemplate.xml");
-                    obj.LoadBinList("C:\\STHI\\ATX1\\binlist.xml");
-                    obj.StartDut();
-
-                    obj.StartTest("PSON Test");
-
-                    Log.Info("Starting DVM test for GPIO controlled PS_ON Signal -> Disabled");
-                    gpio_en = new bool[9] { false, false, true, false, false, false, false, false, false };
-                    FT.pdb1.setGPIO(gpio_en);
-                    Thread.Sleep(3000);
-                    FT.pdb1.setGPIO_nvram(gpio_en);
-                    Thread.Sleep(3000);
-
-                    FT.pdb1.SetUpWCF();
-
-                    Log.Info("Reading 20V output to verify PS_ON is disabled");
-                    try
-                    {
-                        FT.pdb1.read_20V(0.0); // todo: change it to 12v - no 20v test in ATX1
-                    }
-                    catch (Exception ex)
-                    {
-                        FT.pdb1.powerOffCRPS();
-                        Bin = 10640202;
-                        Log.Error("Disaster : Disable PS_ON test failed.");
-                        Log.Error(ex.Message);
-                        obj.SetDutResult(Bin);
-                        obj.EndDut();
-                        obj.EndLot();
-                        FT.pdb1.copytoHost();
-                        throw new Exception($"PSON Disable test failed with {ex.Message}");
-                    }
-
-                    Log.Info("Starting DVM test for GPIO controlled PS_ON Signal -> Enabled");
-                    gpio_en = new bool[9] { false, false, false, false, true, false, false, false, false };
-                    FT.pdb1.setGPIO(gpio_en);
-                    FT.pdb1.setGPIO_nvram(gpio_en);
-
-                    Thread.Sleep(5000);
-
-                    Log.Info("Reading 20V output to verify PS_ON is enabled");
-                    try
-                    {
-                        FT.pdb1.read_20V(10.0);
-                        Log.Info("sukses : PS_ON Enable/Disable test completed.");
-                        obj.EndTest(true);
-
-                        obj.SetDutResult(PassBin);
-                        obj.EndDut();
-                        obj.EndLot();
-                    }
-                    catch (Exception ex)
-                    {
-                        FT.pdb1.powerOffCRPS();
-                        Bin = 10640201;
-                        Log.Error("Disaster : Enable PS_ON test failed.");
-                        Log.Error(ex.Message);
-                        obj.SetDutResult(Bin);
-                        obj.EndDut();
-                        obj.EndLot();
-                        FT.pdb1.copytoHost();
-                        throw new Exception($"PSON Enable test failed with {ex.Message}");
-                    }
-
-                    break;                
+                    break;                               
 
                 case "pwrok_aux":
                     obj = new Logger();
