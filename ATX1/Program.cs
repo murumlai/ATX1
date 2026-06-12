@@ -137,7 +137,7 @@ namespace _ATX1
 
                     if (!isConnected)
                     {
-                        UsbSpi = new DevIO(0x8087, 0x0BE3); // todo: change this after confirm the value
+                        UsbSpi = new DevIO(0x8087, 0x0BE3); 
                         isConnected = UsbSpi.Settings.GetConnectionStatus();
                         porVidPid = false;
                         Log.Info("Done : Board has correct POR VID/PID. Wont be re-programmed.");
@@ -148,7 +148,7 @@ namespace _ATX1
                         obj.EndLot();
 
                         if (!isConnected)
-                            throw new Exception("Device not connected with either 048d/00de or 8087/0BE3."); //same as above
+                            throw new Exception("Device not connected with either 048d/00de or 8087/0BE3."); 
                     }
 
                     try
@@ -159,14 +159,14 @@ namespace _ATX1
 
                             INonVolatileRam vram = device.NonVolatileRam;
 
-                            Log.Info("Programming POR Intel VID/PID : 8087/0BE3"); // todo: confirm the VID/PID value for ATX1
+                            Log.Info("Programming POR Intel VID/PID : 8087/0BE3"); 
                             UsbKeyPowerSettings keypower1 = new UsbKeyPowerSettings();
 
                             keypower1.RemoteWakeUpCapable = false;
                             keypower1.RequestedCurrent = 100;//mA
                             keypower1.HostPowered = true;
                             keypower1.VID = 0x8087;
-                            keypower1.PID = 0x0BE3; // same as above
+                            keypower1.PID = 0x0BE3; 
                             vram.WriteUsbSettings(keypower1);
                             Log.Info("Done programming VID/PID.");
                             Thread.Sleep(1000);
@@ -215,7 +215,7 @@ namespace _ATX1
                     Log.Info("Reading 20V output to verify PS_ON is disabled");
                     try
                     {
-                        FT.pdb1.read_20V(0.0);
+                        FT.pdb1.read_20V(0.0); // todo: change it to 12v - no 20v test in ATX1
                     }
                     catch (Exception ex)
                     {
@@ -347,15 +347,15 @@ namespace _ATX1
 
                     break;
 
-                case "20v_12v":
+                case "12vtest":
                     obj = new Logger();
                     obj.StartLot("C:\\STHI\\ATX1\\ITUFFTemplate.xml");
                     obj.LoadBinList("C:\\STHI\\ATX1\\binlist.xml");
                     obj.StartDut();
 
-                    obj.StartTest("12V and 20V Test");
+                    obj.StartTest("12V Tests");
 
-                    Log.Info("Starting DVM test for MPDU 12VO ,12V CPU and 20V connectors");
+                    Log.Info("Starting DVM test for MPDU 12VO ,12V CPU");
                     DIOchannel_12V = new string[6] { DO_Channel.DO_0, DO_Channel.DO_1, DO_Channel.DO_2, DO_Channel.DO_3, DO_Channel.DO_4,
                 DO_Channel.DO_5};
                     DIOState[] FanMapping = new DIOState[6] { DIOState.HIGH, DIOState.HIGH, DIOState.HIGH,
