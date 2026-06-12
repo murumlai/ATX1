@@ -1003,7 +1003,7 @@ namespace FT
             DIOState[] FanMapping = new DIOState[6] { DIOState.HIGH, DIOState.HIGH, DIOState.HIGH,
                                                       DIOState.HIGH,DIOState.HIGH,DIOState.HIGH};
 
-            string[] fanChannels = new string[10] { "0", "1", "2", "3", "4", "5", "6", "7", "9", "10" };
+            string[] fanChannels = new string[8] { "0", "1", "2", "3", "4", "5", "6", "7"};
 
             for (int j = 0; j < 6; j++)
             {
@@ -1019,28 +1019,16 @@ namespace FT
             {
                 for (int k = 0; k < fanChannels.Length; k++)
                 {
-                    var DVM = 0.00;
+                    var DVM = 0.00;                  
+                    
+                    DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
+                    Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
 
-                    if (k > 7)
+                    if (DVM > expectedVolt + toleranceV || DVM < expectedVolt - toleranceV)
                     {
-                        DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
-                        Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
-
-                        if (DVM > 10 + toleranceV || DVM < 10 - toleranceV)
-                        {
-                            throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + 10 + " Current -> " + DVM);
-                        }
+                        throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + expectedVolt + " Current -> " + DVM);
                     }
-                    else
-                    {
-                        DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
-                        Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
-
-                        if (DVM > expectedVolt + toleranceV || DVM < expectedVolt - toleranceV)
-                        {
-                            throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + expectedVolt + " Current -> " + DVM);
-                        }
-                    }
+                    
                 }
             }
 
@@ -1048,7 +1036,7 @@ namespace FT
             {
                 powerOffCRPS();
                 Bin = 10640208;
-                Log.Error("Disaster : 12V CPU/12VO/20V connected to BPD Fan Header failed");
+                Log.Error("Disaster : 12V CPU/12VO connected to BPD Fan Header failed");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
                 obj.EndDut();
