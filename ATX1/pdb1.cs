@@ -532,54 +532,6 @@ namespace FT
             }
         }
 
-        public static void read_20V(double expected_voltage) 
-        {
-            var toleranceV = 0.5;
-            var expectedVolt = expected_voltage;
-
-            DIOState[] FanMapping = new DIOState[6] { DIOState.HIGH, DIOState.HIGH, DIOState.HIGH,
-                                                      DIOState.HIGH,DIOState.HIGH,DIOState.HIGH};
-
-
-            string[] fanChannels =new string[2] { "9", "10" };
-
-            string[] DIOchannel_12V = new string[6] { DO_Channel.DO_0, DO_Channel.DO_1, DO_Channel.DO_2, DO_Channel.DO_3, DO_Channel.DO_4,
-                DO_Channel.DO_5};
-
-            for (int j = 0; j < 6; j++)
-            {
-                Log.Info("Setting DIO " + j + " to " + FanMapping[j].ToString());
-                STDIO.SetDIO(DIOchannel_12V[j], (byte)FanMapping[j]);
-            }
-            Thread.Sleep(3000);
-
-            try
-            {
-                for (int k = 0; k < fanChannels.Length; k++)
-                {
-                    var DVM = 0.00;
-
-                    DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
-
-                    Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
-
-                    if (DVM > expectedVolt + toleranceV || DVM < expectedVolt - toleranceV)
-                    {
-                        throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + expectedVolt + " Current -> " + DVM);
-                    }
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Log.Info("Disaster : Reading 20V failed!");
-                Log.Error(ex.Message);
-                throw new Exception(ex.Message);
-            }
-
-        }
-
         public static void read_12vAUX(double expVoltage) 
         {
             var toleranceV = 0.5;
