@@ -37,7 +37,7 @@ namespace _ATX1
         static byte[] BLT_RD = Enumerable.Repeat((byte)0x00, BLT_SIZE).ToArray();
 
         private static Logger obj;
-        private static int Bin = 10639999; //default to unknown failure.
+        private static int Bin = 10649999; //default to unknown failure.
         private const int PassBin = 01000000;
         private const string ErrMsg = "ErrorMessage"; //use this to add final error messages to ITUFF.
 
@@ -74,7 +74,7 @@ namespace _ATX1
                     }
                     catch (Exception ex)
                     {
-                        obj.SetDutResult(10630101);
+                        obj.SetDutResult(10640101);
                         obj.EndDut();
                         obj.EndLot();
                         Log.Error("Disaster : Test failed. " + ex.Message);
@@ -103,7 +103,7 @@ namespace _ATX1
                     }
                     catch (Exception ex)
                     {
-                        obj.SetDutResult(10630102);
+                        obj.SetDutResult(10640102);
                         obj.EndDut();
                         obj.EndLot();
                         Log.Error("Disaster : Test failed. " + ex.Message);
@@ -137,7 +137,7 @@ namespace _ATX1
 
                     if (!isConnected)
                     {
-                        UsbSpi = new DevIO(0x8087, 0x0BE1); // todo: change this after confirm the value
+                        UsbSpi = new DevIO(0x8087, 0x0BE3); // todo: change this after confirm the value
                         isConnected = UsbSpi.Settings.GetConnectionStatus();
                         porVidPid = false;
                         Log.Info("Done : Board has correct POR VID/PID. Wont be re-programmed.");
@@ -148,7 +148,7 @@ namespace _ATX1
                         obj.EndLot();
 
                         if (!isConnected)
-                            throw new Exception("Device not connected with either 048d/00de or 8087/0BE1."); //same as above
+                            throw new Exception("Device not connected with either 048d/00de or 8087/0BE3."); //same as above
                     }
 
                     try
@@ -159,14 +159,14 @@ namespace _ATX1
 
                             INonVolatileRam vram = device.NonVolatileRam;
 
-                            Log.Info("Programming POR Intel VID/PID : 8087/0BE1"); // todo: confirm the VID/PID value for ATX1
+                            Log.Info("Programming POR Intel VID/PID : 8087/0BE3"); // todo: confirm the VID/PID value for ATX1
                             UsbKeyPowerSettings keypower1 = new UsbKeyPowerSettings();
 
                             keypower1.RemoteWakeUpCapable = false;
                             keypower1.RequestedCurrent = 100;//mA
                             keypower1.HostPowered = true;
                             keypower1.VID = 0x8087;
-                            keypower1.PID = 0x0BE1; // same as above
+                            keypower1.PID = 0x0BE3; // same as above
                             vram.WriteUsbSettings(keypower1);
                             Log.Info("Done programming VID/PID.");
                             Thread.Sleep(1000);
@@ -183,7 +183,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         Log.Error("Disaster : VID/PID programming failed.");
-                        Bin = 10630103;
+                        Bin = 10640103;
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
                         obj.EndDut();
@@ -220,7 +220,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         FT.pdb1.powerOffCRPS();
-                        Bin = 10630202;
+                        Bin = 10640202;
                         Log.Error("Disaster : Disable PS_ON test failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -251,7 +251,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         FT.pdb1.powerOffCRPS();
-                        Bin = 10630201;
+                        Bin = 10640201;
                         Log.Error("Disaster : Enable PS_ON test failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -333,7 +333,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         powerOffCRPS();
-                        Bin = 10630207;
+                        Bin = 10640207;
                         Log.Info("\n");
                         Log.Error("Disaster : 12V AUX and/or PWROK test failed");
                         Log.Error(ex.Message);
@@ -402,7 +402,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         powerOffCRPS();
-                        Bin = 10630208;
+                        Bin = 10640208;
                         Log.Error("Disaster : 12V CPU/12VO connected to BPD Fan Header failed");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -477,7 +477,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         powerOffCRPS();
-                        Bin = 10630209;
+                        Bin = 10640209;
                         Log.Error("Disaster : External Fan Tach Reading failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -512,7 +512,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         FT.pdb1.powerOffCRPS();
-                        Bin = 10630206;
+                        Bin = 10640206;
                         Log.Error("Disaster: Disable 12v aux power rail using GPIO failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -541,7 +541,7 @@ namespace _ATX1
                     catch (Exception ex)
                     {
                         FT.pdb1.powerOffCRPS();
-                        Bin = 10630205;
+                        Bin = 10640205;
                         Log.Error("Disaster: Enable 12V Aux power rail using GPIO failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -599,7 +599,7 @@ namespace _ATX1
                     {
                         AardvarkApi.aa_close(handle);
                         FT.pdb1.powerOffCRPS();
-                        Bin = 10630210;
+                        Bin = 10640210;
                         Log.Error("Disaster: PMBUS Test Failed.");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
@@ -1053,7 +1053,7 @@ namespace _ATX1
             }
             catch (Exception ex)
             {
-                Bin = 10630202;
+                Bin = 10640202;
                 device.Disconnect();
                 Log.Error(ex.ToString());
                 throw new Exception("BLT read failed");
@@ -1239,7 +1239,7 @@ namespace _ATX1
             }
             catch (Exception ex)
             {
-                Bin = 10630201;
+                Bin = 10640201;
                 device.Disconnect();
                 Log.Error(ex.ToString());
                 throw new Exception("BLT write failed");

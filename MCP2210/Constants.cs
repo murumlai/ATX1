@@ -34,7 +34,7 @@ namespace MCP2210 {
         /// The product ID.
         /// </summary>
         public const int ProductId = 0x00DE;
-        public const int pidIntel = 0x0BE1;
+        public const int pidIntel = 0x0BE3;
         /// <summary>
         /// The Hid packet size.
         /// </summary>

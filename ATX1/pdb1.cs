@@ -222,7 +222,7 @@ namespace FT
             Log.Info("Writing GPIO settings of MCP 2210");
             //Variables
             uint mcp2210_VID = 0x8087; // VID Intel
-            uint mcp2210_PID = 0x0BE1; // todo : need to check the assigned PID for this card
+            uint mcp2210_PID = 0x0BE3; // todo : need to check the assigned PID for this card
 
             IUsbToSpiDevice device = new UsbToSpiDevice();
             device.Connect();
@@ -235,7 +235,7 @@ namespace FT
 
             if (!isConnected)
             {
-                throw new Exception("Device not connected with 8087/0BE1.");
+                throw new Exception("Device not connected with 8087/0BE3.");
             }
 
             // change default output of current RAM (volatile)
@@ -262,7 +262,7 @@ namespace FT
 
             //Variables
             uint mcp2210_VID = 0x8087; // VID for Microchip Technology Inc. 0x04D8
-            uint mcp2210_PID = 0x0BE1; // todo : same as above
+            uint mcp2210_PID = 0x0BE3; // todo : same as above
 
             bool isConnected = false; // Connection status variable for MCP2210
 
@@ -272,7 +272,7 @@ namespace FT
 
             if (!isConnected)
             {
-                throw new Exception("Device not connected with 8087/0BE1.");
+                throw new Exception("Device not connected with 8087/0BE3.");
             }
 
             IVolatileRam vram = device.VolatileRam;
@@ -321,7 +321,7 @@ namespace FT
             Log.Info("Writing GPIO settings of NVRAM of MCP 2210");
             //Variables
             uint mcp2210_VID = 0x8087; // VID for Microchip Technology Inc. 0x04D8
-            uint mcp2210_PID = 0x0BE1; // same as above
+            uint mcp2210_PID = 0x0BE3; // same as above
 
             IUsbToSpiDevice device = new UsbToSpiDevice();
             device.Connect();
@@ -334,7 +334,7 @@ namespace FT
 
             if (!isConnected)
             {
-                throw new Exception("Device not connected with 8087/0BE1.");
+                throw new Exception("Device not connected with 8087/0BE3.");
             }
 
             // change default output of NV RAM 
@@ -362,7 +362,7 @@ namespace FT
 
             //Variables
             uint mcp2210_VID = 0x8087; // VID for Intel
-            uint mcp2210_PID = 0x0BE1; // check value
+            uint mcp2210_PID = 0x0BE3; // check value
 
             bool isConnected = false; // Connection status variable for MCP2210
 
@@ -372,7 +372,7 @@ namespace FT
 
             if (!isConnected)
             {
-                throw new Exception("Device not connected with 8087/0BE1.");
+                throw new Exception("Device not connected with 8087/0BE3.");
             }
 
             // change default output of Non - volatile RAM
@@ -440,7 +440,7 @@ namespace FT
 
             //Variables
             uint mcp2210_VID = 0x8087; // VID for Microchip Technology Inc. 0x04D8
-            uint mcp2210_PID = 0x0BE1; // check the value
+            uint mcp2210_PID = 0x0BE3; // check the value
 
             bool isConnected = false; // Connection status variable for MCP2210
 
@@ -450,7 +450,7 @@ namespace FT
 
             if (!isConnected)
             {
-                throw new Exception("Device not connected with 8087/0BE1.");
+                throw new Exception("Device not connected with 8087/0BE3.");
             }
 
             var pinVal = "";
@@ -804,7 +804,7 @@ namespace FT
             catch (Exception ex)
             {
                 Log.Error("Disaster : VID/PID programming failed.");
-                Bin = 10630103;
+                Bin = 10640103;
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
                 obj.EndDut();
@@ -834,7 +834,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630102;
+                Bin = 10640102;
                 Log.Error("Disaster: Write BLT test failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -859,7 +859,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630101;
+                Bin = 10640101;
                 Log.Error("Disaster : Read BLT test failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -888,7 +888,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630202;
+                Bin = 10640202;
                 Log.Error("Disaster : Disable PS_ON test failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -912,7 +912,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630201;
+                Bin = 10640201;
                 Log.Error("Disaster : Enable PS_ON test failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -940,7 +940,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630203;
+                Bin = 10640203;
                 Log.Error("Disaster: Disable 20v power rail using GPIO failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -963,7 +963,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630204;
+                Bin = 10640204;
                 Log.Error("Disaster: Enable 20v power rail using GPIO failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -992,7 +992,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630206;
+                Bin = 10640206;
                 Log.Error("Disaster: Disable 12V AUX using GPIO failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -1015,7 +1015,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630205;
+                Bin = 10640205;
                 Log.Error("Disaster: Enable 12V AUX using GPIO failed..");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -1083,7 +1083,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630207;
+                Bin = 10640207;
                 Log.Info("\n");
                 Log.Error("Disaster : 12V AUX and/or PWROK test failed");
                 Log.Error(ex.Message);
@@ -1147,7 +1147,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630208;
+                Bin = 10640208;
                 Log.Error("Disaster : 12V CPU/12VO/20V connected to BPD Fan Header failed");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -1213,7 +1213,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630209;
+                Bin = 10640209;
                 Log.Error("Disaster : External Fan Tach Reading failed.");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
@@ -1251,7 +1251,7 @@ namespace FT
             catch (Exception ex)
             {
                 powerOffCRPS();
-                Bin = 10630210;
+                Bin = 10640210;
                 Log.Error("Disaster : GPIO 5 - PWROK read test failed");
                 Log.Error(ex.Message);
                 obj.SetDutResult(Bin);
