@@ -56,9 +56,8 @@ ATX1.exe <test_name>
 | `writeblt` | Write BLT EEPROM from `ATX1_BLT.ini` |
 | `vidpid` | Program MCP2210 USB VID/PID to Intel values (`8087/0BE1`) |
 | `pson` | Test GPIO-controlled PS_ON signal (enable/disable 20V output) |
-| `20v_test` | Test GPIO-controlled 20V power rail (enable/disable) |
 | `pwrok_aux` | DVM test for 12V Aux and PWR_OK signals on 2x2 connectors |
-| `20v_12v` | DVM test for 12V CPU, 12VO, and 20V connectors via BPD fan header |
+| `20v_12v` | DVM test for 12V CPU and 12VO connectors via BPD fan header |
 | `ext_fan_tach` | Read external fan tach frequency (min threshold: 367 Hz) |
 | `gpio_aux` | Test GPIO-controlled 12V Aux power rail (enable/disable) |
 | `pmbus` | PMBus I2C communication test with CRPS (read model string) |

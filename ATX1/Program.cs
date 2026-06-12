@@ -261,71 +261,7 @@ namespace _ATX1
                         throw new Exception($"PSON Enable test failed with {ex.Message}");
                     }
 
-                    break;
-
-                case "20v_test":
-                    obj = new Logger();
-                    obj.StartLot("C:\\STHI\\ATX1\\ITUFFTemplate.xml");
-                    obj.LoadBinList("C:\\STHI\\ATX1\\binlist.xml");
-                    obj.StartDut();
-
-                    obj.StartTest("20V Test");
-
-                    Log.Info("Starting DVM test for GPIO-based 20V connectors - disabled");
-                    gpio_en = new bool[9] { true, false, true, false, true, false, false, false, false };
-                    FT.pdb1.setGPIO(gpio_en);
-                    Thread.Sleep(5000);
-
-                    FT.pdb1.SetUpWCF();
-
-                    Log.Info("Reading 20V output to verify output is disabled");
-                    try
-                    {
-                        FT.pdb1.read_20V(0.0);
-                    }
-                    catch (Exception ex)
-                    {
-                        FT.pdb1.powerOffCRPS();
-                        Bin = 10630203;
-                        Log.Error("Disaster: Disable 20v power rail using GPIO failed.");
-                        Log.Error(ex.Message);
-                        obj.SetDutResult(Bin);
-                        obj.EndDut();
-                        obj.EndLot();
-                        FT.pdb1.copytoHost();
-                        throw new Exception($"20V Disable test failed with {ex.Message}");
-                    }
-
-                    Log.Info("Starting DVM test for GPIO-based 20V connectors - enabled");
-                    gpio_en = new bool[9] { false, false, false, false, true, false, false, false, false };
-                    FT.pdb1.setGPIO(gpio_en);
-                    Thread.Sleep(5000);
-
-                    Log.Info("Reading 20V output to verify output is enabled");
-                    try
-                    {
-                        FT.pdb1.read_20V(10.0);
-                        Log.Info("sukses2 : 20V Enable/Disable test completed.");
-                        obj.EndTest(true);
-
-                        obj.SetDutResult(PassBin);
-                        obj.EndDut();
-                        obj.EndLot();
-                    }
-                    catch (Exception ex)
-                    {
-                        FT.pdb1.powerOffCRPS();
-                        Bin = 10630204;
-                        Log.Error("Disaster: Enable 20v power rail using GPIO failed.");
-                        Log.Error(ex.Message);
-                        obj.SetDutResult(Bin);
-                        obj.EndDut();
-                        obj.EndLot();
-                        FT.pdb1.copytoHost();
-                        throw new Exception($"20V Enable test failed with {ex.Message}");
-                    }
-
-                    break;
+                    break;                
 
                 case "pwrok_aux":
                     obj = new Logger();
@@ -425,7 +361,7 @@ namespace _ATX1
                     DIOState[] FanMapping = new DIOState[6] { DIOState.HIGH, DIOState.HIGH, DIOState.HIGH,
                                                       DIOState.HIGH,DIOState.HIGH,DIOState.HIGH};
 
-                    string[] fanChannels = new string[10] { "0", "1", "2", "3", "4", "5", "6", "7", "9", "10" };
+                    string[] fanChannels = new string[8] { "0", "1", "2", "3", "4", "5", "6", "7"};
                     FT.pdb1.SetUpWCF();
 
                     for (int j = 0; j < 6; j++)
@@ -444,29 +380,18 @@ namespace _ATX1
                         {
                             var DVM = 0.00;
 
-                            if (k > 7)
-                            {
+                            
                                 DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
                                 Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
 
-                                if (DVM > 10 + toleranceV || DVM < 10 - toleranceV)
-                                {
-                                    throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + 10 + " Current -> " + DVM);
-                                }
-                            }
-                            else
+                            if (DVM > expectedVolt + toleranceV || DVM < expectedVolt - toleranceV)
                             {
-                                DVM = STDIO.ReadCalculatedDVM(fanChannels[k]);
-                                Log.Info("DVM for Channel " + $"{fanChannels[k]}" + " is : " + DVM);
-
-                                if (DVM > expectedVolt + toleranceV || DVM < expectedVolt - toleranceV)
-                                {
-                                    throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + expectedVolt + " Current -> " + DVM);
-                                }
-                            }
+                                throw new Exception($"DVM for channel {fanChannels[k]} failed." + " Expected : " + expectedVolt + " Current -> " + DVM);
+                            }                               
+                            
                         }
 
-                        Log.Info("sukses4 : 20V and 12V power rails tests completed.");
+                        Log.Info("sukses4 : 12V power rails tests completed.");
                         obj.EndTest(true);
 
                         obj.SetDutResult(PassBin);
@@ -478,13 +403,13 @@ namespace _ATX1
                     {
                         powerOffCRPS();
                         Bin = 10630208;
-                        Log.Error("Disaster : 12V CPU/12VO/20V connected to BPD Fan Header failed");
+                        Log.Error("Disaster : 12V CPU/12VO connected to BPD Fan Header failed");
                         Log.Error(ex.Message);
                         obj.SetDutResult(Bin);
                         obj.EndDut();
                         obj.EndLot();
                         copytoHost();
-                        throw new Exception($"20V and 12V power rails test failed with {ex.Message}");
+                        throw new Exception($"12V power rails test failed with {ex.Message}");
                     }
 
 
@@ -683,9 +608,7 @@ namespace _ATX1
                         FT.pdb1.copytoHost();
                         throw new Exception($"PMBUS test failed with {ex.Message}");
 
-                    }                   
-
-
+                    }              
                     break;
 
                 case "default_config":
