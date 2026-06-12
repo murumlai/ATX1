@@ -683,7 +683,7 @@ namespace FT
             }
         }
 
-        public static int pdb1ft()
+        public static int atx1ft()
         {
             copytoFCC();//copy updated 01.scan file from Host           
 

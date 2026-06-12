@@ -559,7 +559,7 @@ namespace _ATX1
                         Log.Info("########################################################################################");
                         Log.Info($"Starting FT for MPDU ATX1 Fab B ...");
 
-                        Bin = pdb1.pdb1ft();
+                        Bin = pdb1.atx1ft();
 
                         if (Bin != PassBin)
                         {
@@ -594,7 +594,7 @@ namespace _ATX1
                             //Log.Info($"Starting FT loop for MPDU ATX1 Fab B ...  Loop = {loop}");
                             Log.Info($"Starting FT for ATX1 Fab B ...");
 
-                            Bin = pdb1.pdb1ft();
+                            Bin = pdb1.atx1ft();
 
                             if (Bin != PassBin)
                             {
